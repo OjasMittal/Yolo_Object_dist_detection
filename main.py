@@ -58,5 +58,6 @@ while True:
         pygame.mixer.music.play()
         time.sleep(1)
     cv2.imshow("image0.jpg", frame)
+
 cap.release()
 cv2.destroyAllWindows()
