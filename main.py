@@ -14,20 +14,34 @@ while True:
         break
     ret, frame = cap.read()
     z=model.predict(frame, show=True,classes=[0])
-    # 0 is the class for human and 56 is for chair.
     x = ultrasonic_data.readline()
     val = str(x.decode().strip())
     dist = int(val)
-    cv2.imshow("image0.jpg", frame)
-    if(dist>500):
-        print("Detecting Distance....")
+    #This is the distance calculated using Ultrasonic sensor.
+    for i in z:
+        boxes=i.boxes.boxes.numpy()
+        if len(boxes)!=0:
+            a,b,c,d=i.boxes.xyxy[0].tolist()
+            print("Co-ods are: ",a,b,c,d)
+            x=int((a+c)/2)
+            y=int((b+d)/2)
+            w = c-a
+            h = d-b
+            W = 45
+            f = 700
+            d = (W*f)/w -10
+    dist1 = int(d)
+    # This is the distance calculated using camera
+    print(dist," and ",dist1)
+    if(dist>500 or dist1>500):
+        print("No human in detection range....")
         cv2.rectangle(frame, (10, 10), (300, 50), (255, 255, 255), cv2.FILLED)
         cv2.putText(frame, "Detecting", (50, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
-    elif(dist>200 and dist<=500 ):
+    elif(dist>200 and dist<=500 and dist1>200 and dist1<=500 ):
         print("Distance: ",dist)
         cv2.rectangle(frame, (10, 10), (300, 50), (255, 255, 255), cv2.FILLED)
         cv2.putText(frame, "Safe Distance", (50, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
-    elif(dist>100 and dist<=200):
+    elif(dist>100 and dist<=200 and dist1>100 and dist1<=200):
         print("Distance: ",dist," Close-> Inside layer 1")
         sound_file = 'warning.mp3'
         pygame.mixer.music.load(sound_file)
@@ -35,7 +49,7 @@ while True:
         time.sleep(1)
         cv2.rectangle(frame, (10, 10), (200, 50), (255, 255, 255), cv2.FILLED)
         cv2.putText(frame, "Close", (50, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
-    elif(dist<=100):
+    elif(dist<=100 and dist1<100):
         print("Distance: ", dist, " Very Close-> Inside layer 2, Turn off machine")
         cv2.rectangle(frame, (10, 10), (300, 50), (255, 255, 255), cv2.FILLED)
         cv2.putText(frame, "Very Close", (50, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
