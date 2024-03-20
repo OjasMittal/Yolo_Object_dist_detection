@@ -1,6 +1,6 @@
 # Factory Hazard Mitigation System
 
-**Human Movement Detection-Based Control System**
+## Human Movement Detection-Based Control System
 
 A comprehensive system utilizing YOLO (You Only Look Once) V8 object detection technology, ultrasonic sensor, and Arduino Uno microcontrollers to enhance factory safety by detecting and alerting workers of their proximity to operating machinery. The primary goal is to prevent accidents by providing timely warnings to workers and initiating machine shutdown mechanisms when individuals approach hazardous areas within the factory floor. The system aims to minimize the risk of workplace injuries and fatalities, thereby fostering a safer working environment and promoting operational efficiency within industrial settings.
 
