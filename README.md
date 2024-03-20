@@ -1,4 +1,4 @@
-# Yolo_Object_dist_detection
+# Factory Hazard Mitigation System
 
 **Human Movement Detection-Based Control System**
 
