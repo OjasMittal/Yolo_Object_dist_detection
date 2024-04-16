@@ -19,7 +19,7 @@ while True:
     dist = int(val)
     #This is the distance calculated using Ultrasonic sensor.
     for i in z:
-        boxes=i.boxes.boxes.numpy()
+        boxes=i.boxes.numpy()
         if len(boxes)!=0:
             a,b,c,d=i.boxes.xyxy[0].tolist()
             x=int((a+c)/2)
