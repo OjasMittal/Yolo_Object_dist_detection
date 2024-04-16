@@ -6,7 +6,7 @@ import time
 
 pygame.init()
 model = YOLO('yolov8n.pt')
-ultrasonic_data = serial.Serial('COM3', 9600)
+ultrasonic_data = serial.Serial('COM7', 9600)
 cap = cv2.VideoCapture(0)
 
 while True:
